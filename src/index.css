@@ -4,7 +4,15 @@
 
 @layer base {
   :root {
-    --color-purple: 122 106 225;
-    --color-primary: var(--color-purple);
+    --primary-dark: 43 57 69;
+    --dark-background: 32 44 55;
+    --light-text: 17 21 23;
+    --light-input: 133 133 133;
+    --light-background: 250 250 250;
+    --primary-white: 255 255 255;
   }
+}
+
+.min-h {
+  min-height: calc(100svh - 66px);
 }

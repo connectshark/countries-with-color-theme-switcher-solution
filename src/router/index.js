@@ -8,7 +8,21 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
-    }
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: () => import('../views/DetailView.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      redirect: () => {
+        return {
+          path: '/'
+        }
+      }
+    },
   ]
 })
 
