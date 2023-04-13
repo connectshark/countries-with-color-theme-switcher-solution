@@ -1,9 +1,9 @@
-import { onBeforeMount, ref } from 'vue'
+import { isRef, onBeforeMount, ref, watch, watchEffect } from 'vue'
 
 const API_DOMAIN = import.meta.env.VITE_API_DOMAIN
 const API_VERSION = import.meta.env.VITE_API_VERSION
 
-export default function ( code = undefined ) {
+export default function ( cca3 = undefined ) {
   const data = ref([])
   const loading = ref(false)
   const borders = ref([])
@@ -19,7 +19,7 @@ export default function ( code = undefined ) {
     loading.value = false
   }
 
-  const fetchTargetCountry = async () => {
+  const fetchTargetCountry = async (code) => {
     loading.value = true
     data.value = []
     borders.value = []
@@ -27,7 +27,7 @@ export default function ( code = undefined ) {
     const fetch_response =  await fetch(API_DOMAIN + '/' + API_VERSION + `/alpha?codes=${code}`)
     const response = await fetch_response.json()
 
-    if (response[0].borders.length > 0) {
+    if (response[0]?.borders?.length > 0) {
       const str = response[0].borders.join(',')
       borders.value = await fetchBorderCountry(str)
     }
@@ -47,8 +47,14 @@ export default function ( code = undefined ) {
     })
   }
 
-  if (code) {
-    onBeforeMount(fetchTargetCountry)
+  if (isRef(cca3)) {
+    onBeforeMount(async () => {
+      await fetchTargetCountry(cca3.value)
+    })
+
+    watchEffect(async () => {
+      await fetchTargetCountry(cca3.value)
+    })
   } else {
     onBeforeMount(fetchAllData)
   }

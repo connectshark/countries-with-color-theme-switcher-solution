@@ -9,21 +9,18 @@
     <div v-if="loading" class=" text-center">
       <i class='bx bx-loader-alt bx-spin bx-md' ></i>
     </div>
-    <div class=" w-11/12 mx-auto grid xl:grid-cols-2 grid-rows-2 gap-4" v-else>
+    <div class=" w-11/12 mx-auto grid lg:grid-cols-2 grid-rows-2 gap-4" v-else>
       <figure class="row-span-2">
-        <img :src="data.flags.svg" alt="country flag">
+        <img class=" mx-auto" :src="data.flags.svg" alt="country flag">
       </figure>
-      <div class="p-6">
-        <h2 class="font-extrabold text-2xl mb-6">{{ data.name.common }}</h2>
-        <div class=" grid grid-cols-2 gap-4">
-
-          <p><span class="font-semibold">Population:</span> {{ data.population }}</p>
-          <p><span class="font-semibold">Region:</span> {{ data.region }}</p>
-          <p><span class="font-semibold">Sub Region:</span> {{ data.subregion }}</p>
-          <p><span class="font-semibold">Capital:</span> {{ data.capital[0] }}</p>
-          <p><span class="font-semibold">currencies:</span> {{ Object.keys(data.currencies)[0] }}</p>
-          <p><span class="font-semibold">languages:</span> <span v-for="language in Object.values(data.languages)">{{ language }}</span></p>
-        </div>
+      <div class="p-6 grid grid-cols-2 gap-4">
+        <h2 class=" col-span-2 font-extrabold text-2xl mb-6">{{ data.name.common }}</h2>
+        <p><span class="font-semibold">Population:</span> {{ data.population }}</p>
+        <p><span class="font-semibold">Region:</span> {{ data.region }}</p>
+        <p><span class="font-semibold">Sub Region:</span> {{ data.subregion }}</p>
+        <p><span class="font-semibold">Capital:</span> {{ data.capital[0] }}</p>
+        <p><span class="font-semibold">currencies:</span> {{ Object.keys(data.currencies)[0] }}</p>
+        <p><span class="font-semibold">languages:</span><span class="inline-block" v-for="language in Object.values(data.languages)">{{ language }}</span></p>
       </div>
       <div class="p-6" v-if="borders.length > 0">
         <h3 class="font-extrabold">Border Countries:</h3>
@@ -38,16 +35,19 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import useCountriesData from '../composable/useCountriesData'
 
 const props = defineProps({
   country: String
 })
 
+const countryCode = computed(() => props.country)
+
 const {
   data,
   loading,
   borders
-} = useCountriesData(props.country)
+} = useCountriesData(countryCode)
 
 </script>

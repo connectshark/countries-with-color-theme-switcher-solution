@@ -17,23 +17,30 @@
         </select>
       </label>
     </aside>
-    <TransitionGroup v-bind="fadeTransition" tag="ul" class=" grid gap-6 w-5/6 mx-auto lg:grid-cols-3">
+    <TransitionGroup v-bind="fadeTransition" tag="ul" class=" grid gap-8 w-5/6 mx-auto lg:grid-cols-4">
       <li v-if="loading" class=" text-center col-span-full" key="loading">
         <i class='bx bx-loader-alt bx-spin bx-md' ></i>
       </li>
-      <li class=" bg-primary-white dark:bg-primary-dark shadow rounded-md overflow-hidden" v-for="country in countryFilter" :key="country.cca3">
-        <router-link :to="`/detail/` + country.cca3" class=" block">
-          <figure>
-            <img loading="lazy" class="lg:h-72 object-contain object-center" :src="country.flags.svg" alt="country flags">
-          </figure>
-          <div class=" p-6">
-            <h3 class="leading-loose font-extrabold">{{ country.name.common }}</h3>
-            <p><span class="font-semibold">Population:</span> {{ country.population }}</p>
-            <p><span class="font-semibold">Region:</span> {{ country.region }}</p>
-            <p><span class="font-semibold">Capital:</span> {{ country.capital[0] }}</p>
-          </div>
-        </router-link>
+      <li v-else-if="countryFilter.length === 0" class="text-center col-span-full">
+        <p>
+          <i class='bx bx-question-mark bx-md'></i>
+        </p>
       </li>
+      <template v-else>
+        <li class=" bg-primary-white dark:bg-primary-dark shadow rounded-md overflow-hidden" v-for="country in countryFilter" :key="country.cca3">
+          <router-link :to="`/detail/` + country.cca3" class=" block">
+            <figure>
+              <img loading="lazy" class="lg:h-48 lg:w-full object-contain object-center" :src="country.flags.svg" alt="country flags">
+            </figure>
+            <div class=" p-6">
+              <h3 class="leading-loose font-extrabold">{{ country.name.common }}</h3>
+              <p><span class="font-semibold">Population:</span> {{ country.population }}</p>
+              <p><span class="font-semibold">Region:</span> {{ country.region }}</p>
+              <p><span class="font-semibold">Capital:</span> {{ country.capital[0] }}</p>
+            </div>
+          </router-link>
+        </li>
+      </template>
     </TransitionGroup>
   </main>
 </template>
