@@ -1,7 +1,7 @@
 <template>
   <main class="min-h">
-    <aside class=" w-11/12 mx-auto py-10">
-      <label class="relative block shadow rounded-md overflow-hidden mb-6 text-light-text dark:text-primary-white">
+    <aside class=" w-11/12 mx-auto py-10 lg:flex lg:items-center lg:justify-between">
+      <label class="relative block shadow rounded-md overflow-hidden mb-6 text-light-text dark:text-primary-white lg:w-2/5">
         <span class="absolute text-light-input top-4 left-8">
           <i class='bx bx-search bx-sm align-middle'></i>
         </span>
