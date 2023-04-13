@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
-export const useDefaultStore = defineStore({
-  id: 'default',
+export const useCountryStore = defineStore({
+  id: 'country',
   state: () => ({
   }),
   getters: {

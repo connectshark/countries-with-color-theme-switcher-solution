@@ -10,9 +10,10 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/detail',
+      path: '/detail/:country',
       name: 'detail',
-      component: () => import('../views/DetailView.vue')
+      component: () => import('../views/DetailView.vue'),
+      props: true
     },
     {
       path: '/:pathMatch(.*)*',

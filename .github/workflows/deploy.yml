@@ -11,6 +11,9 @@ jobs:
         run: |
           npm install
           npm run build
+        env:
+          VITE_API_DOMAIN : ${{ secrets.VITE_API_DOMAIN }}
+          VITE_API_VERSION : ${{ secrets.VITE_API_VERSION }}
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

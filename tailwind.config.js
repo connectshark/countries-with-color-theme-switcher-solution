@@ -14,6 +14,9 @@ module.exports = {
         'light-input': 'rgb(var(--light-input) / <alpha-value>)',
         'light-background': 'rgb(var(--light-background) / <alpha-value>)',
         'primary-white': 'rgb(var(--primary-white) / <alpha-value>)',
+      },
+      aspectRatio: {
+        '3/2': '3 / 2'
       }
     },
     fontFamily: {
